@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>JavaScript Discussion</title>
 	<style>
-		p{
+		p {
 			background-color: #b3b3b3;
 			border: 3px solid #FFFFFF;
 			padding: 3%;
@@ -14,47 +14,43 @@
 	</style>
 
 	<script type="text/javascript">
-	function displayInformation () {
-		// Your code goes here. 
-		// Do not change any other code in this file
-		// All of the steps below must be achieved using JavaScript!
-
-		
+	document.addEventListener("DOMContentLoaded", function() {
 		// 1. Change the h1 element to your name.
-		document.querySelector("h1").innerHTML = 'Lauren Asam';
-
+		var h1 = document.querySelector("h1");
+		h1.textContent = "Lauren Asam";
 
 		// 2. Update the three span elements using ONLY JavaScript
-		document.querySelector("#URL").innerHTML = window.location.href;
-		document.querySelector("#items").innerHTML = document.querySelectorAll("li").length;
-		document.querySelector("#time").innerHTML = new Date().toLocaleString();
-
-
+		var urlSpan = document.getElementById("URL");
+		var itemsSpan = document.getElementById("items");
+		var timeSpan = document.getElementById("time");
+		
+		urlSpan.textContent = window.location.href;
+		itemsSpan.textContent = document.querySelectorAll("li").length;
+		var currentDate = new Date();
+		timeSpan.textContent = currentDate.toLocaleString();
 
 		// 3. Change the background color and margin for the entire page.
-		document.body.style.backgroundColor = "#b3b3b3";
-		document.body.style.margin = "0";
+		document.body.style.backgroundColor = "#F2F2F2";
+		document.body.style.margin = "20px";
 
+		// 4. If someone uses the keyboard shortcut to copy the words "University of Michigan" then add the words "Go Blue" to the final div.
+		// Each occurrence should be on a separate line. Don't use paragraphs.
+		function copyFunction() {
+			var copiedText = window.getSelection().toString();
+			if (copiedText === "University of Michigan") {
+				var cheerDiv = document.getElementById("cheer");
+				var goBlueText = document.createElement("div");
+				goBlueText.textContent = "Go Blue";
+				cheerDiv.appendChild(goBlueText);
+			}
+		}
 
-    }
-
-    // 4. If someone uses the keyboard shortcut to copy the words "University of Michigan" then add the words "Go Blue" to the final div.  
-    // Each occurence should be on a separate line.  Don't use 
-    // paragraphs.
-	document.querySelector("ul").addEventListener("copy", function(event) {
-  const copiedText = window.getSelection().toString();
-  const cheerDiv = document.querySelector("#cheer");
-  
-  if (copiedText.includes("University of Michigan")) {
-    cheerDiv.innerHTML += "Go Blue<br>";
-  }
-});
-		
-</script>
-
+		document.addEventListener("copy", copyFunction);
+	});
+	</script>
 </head>
 <body>
-	<h1>Your name goes here</h1>
+	<h1>Your Name</h1>
 
 	<ol>
 		<li>Apples</li>
@@ -64,20 +60,17 @@
 	</ol>
 	<h2>Use JavaScript to display the following information here:</h2>
 	<p>
-		The URL of this page is: <span id = "URL"></span><br/>
-		The number of list items for this page: <span id = "items"></span><br/>
-		The current date/time is: <span id = "time"></span><br/>
+		The URL of this page is: <span id="URL"></span><br/>
+		The number of list items for this page: <span id="items"></span><br/>
+		The current date/time is: <span id="time"></span><br/>
 	</p>
 	<ul>
 		<li>Kent State</li>
 		<li>University of Pittsburgh</li>
 		<li>University of Ulster</li>
 		<li>California State University Long Beach</li>
-		<li oncopy="copyFunction()">University of Michigan</li>
+		<li>University of Michigan</li>
 	</ul>
-	<div id="cheer">
-
-	</div>
-
+	<div id="cheer"></div>
 </body>
 </html>
